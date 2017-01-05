@@ -1,0 +1,21 @@
+{
+  "name": "fog-plugin-wol",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A wake-on-lan plugin for fog 2.0",
+  "dependencies": {
+    "node-wol": "^0.1.1",
+    "sails-util-mvcsloader": "^0.4.0"
+  },
+  "fog": {
+    "isPlugin": true,
+    "hooks": {
+      "host.deploy": "WOLService.wakeHost",
+      "host.capture": "WOLService.wakeHost"
+    }
+  },
+  "main": "index.js",
+  "sails": {
+    "isHook": true
+  }
+}
