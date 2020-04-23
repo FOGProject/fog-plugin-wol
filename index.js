@@ -12,6 +12,7 @@ module.exports = function(sails) {
        */
       loader.inject(
         {
+          controllers: __dirname + '/api/controllers',
           helpers: __dirname + '/api/helpers'
         },
         (err) => {
