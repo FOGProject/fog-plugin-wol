@@ -1,3 +1,5 @@
 module.exports.routes = {
-  '/wol': {action: 'wol/active'},
+  '/wol': async (req, res, next) => {
+    res.send('FOG WOL Plugin')
+  },
 };
