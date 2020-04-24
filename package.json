@@ -17,7 +17,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "github:fogproject/fog-plugin-wol#b5f69fb5234cc232b09f4228b271f5bf3f75b90c",
+  "_resolved": "github:fogproject/fog-plugin-wol#fd5282d1c284eb6826ab7908df270643dc3a7d16",
   "_spec": "github:fogproject/fog-plugin-wol",
   "_where": "/root/fog-node",
   "bundleDependencies": false,
@@ -40,8 +40,8 @@
   "sails": {
     "isHook": true
   },
-  "version": "0.0.1",
   "scripts": {
     "test": "node ../node_modules/mocha/bin/mocha test/route/**/*.test.js"
-  }
+  },
+  "version": "0.0.1"
 }

@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: 'Emit',
   description: 'Emit wol.',
-  fn: async function () {
+  fn: async function (inputs, exits) {
     let req = this.req,
       res = this.res,
       params = req.allParams(),
@@ -9,10 +9,10 @@ module.exports = {
       ip = params.ip || undefined;
     await sails.helpers.wol.emit(mac, ip).switch({
       error: (err) => {
-        throw {error: err};
+        return exits.error(err);
       },
       success: (info) => {
-        return info;
+        return exits.success(info);
       }
     });
   }
