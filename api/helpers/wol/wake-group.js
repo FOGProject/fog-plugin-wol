@@ -16,12 +16,19 @@ module.exports = {
   },
   fn:  async function (inputs, exits) {
     let group = inputs.group,
-      hosts = group.hosts;
+      hosts = group.hosts,
+      messages = [];
     await hosts.forEach(async (host) => {
-      await sails.helpers.wol.wakeHost(host, async (err, info) => {
-        if (err) throw {error: err};
+      await sails.helpers.wol.wakeHost(host).switch({
+        error: (err) => {
+          return exits.error(err);
+        },
+        success: (info) => {
+          messages.push(info);
+        }
       });
     });
-    return exits.success(null, {message: `WOL Packets sent to group: ${group.name}`});
+    messages.push({message: `WOL Packets sent to group: ${group.name}`});
+    return exits.success({messages});
   }
 };

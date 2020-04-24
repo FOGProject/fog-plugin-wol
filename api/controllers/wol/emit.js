@@ -7,9 +7,13 @@ module.exports = {
       params = req.allParams(),
       mac = params.mac,
       ip = params.ip || undefined;
-    await sails.helpers.wol.emit(mac, ip, (err, info) => {
-      if (err) throw {error: err};
-      return info;
+    await sails.helpers.wol.emit(mac, ip).switch({
+      error: (err) => {
+        throw {error: err};
+      },
+      success: (info) => {
+        return info;
+      }
     });
   }
 };

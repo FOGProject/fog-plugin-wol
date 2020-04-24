@@ -16,12 +16,20 @@ module.exports = {
   },
   fn:  async function (inputs, exits) {
     let host = inputs.host,
-      macs = host.macs;
+      macs = host.macs,
+      ip = host.ip || false,
+      messages = [];
     await macs.forEach(async (mac) => {
-      await sails.helpers.wol.emit(mac, (err, info) => {
-        if (err) throw {error: err};
+      await sails.helpers.wol.emit(mac, ip).switch({
+        error: (err) => {
+          return exits.error(err);
+        },
+        success: (info) => {
+          messages.push(info);
+        }
       });
     });
-    return exits.success(null, {message: `WOL Packet sent to host: ${host.name}`});
+    messages.push({message: `WOL Packet sent to host: ${host.name}`});
+    return exits.success({messages});
   }
 };
