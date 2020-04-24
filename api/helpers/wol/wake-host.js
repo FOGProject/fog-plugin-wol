@@ -19,8 +19,9 @@ module.exports = {
       macs = host.macs,
       ip = host.ip || false,
       messages = [];
-    await macs.forEach(async (mac) => {
-      await sails.helpers.wol.emit(mac, ip).switch({
+    if (macs === undefined || macs.length < 1) return exits.success('Host has no macs associated');
+    macs.forEach((mac) => {
+      sails.helpers.wol.emit(mac, ip).switch({
         error: (err) => {
           return exits.error(err);
         },

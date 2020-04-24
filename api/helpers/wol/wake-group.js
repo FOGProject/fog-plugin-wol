@@ -18,8 +18,9 @@ module.exports = {
     let group = inputs.group,
       hosts = group.hosts,
       messages = [];
-    await hosts.forEach(async (host) => {
-      await sails.helpers.wol.wakeHost(host).switch({
+    if (hosts === undefined || hosts.length < 1) return exits.success('Group has no hosts associated');
+    hosts.forEach((host) => {
+      sails.helpers.wol.wakeHost(host).switch({
         error: (err) => {
           return exits.error(err);
         },

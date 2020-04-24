@@ -8,7 +8,6 @@ module.exports = {
       description: 'The MAC address to wake up',
       required: true,
       type: 'string',
-      regex: /^[0-9a-f]{1,2}([.:-])[0-9a-f]{1,2}(?:\1[0-9a-f]{1,2}){4}$/i
     },
     ip: {
       friendlyName: 'IP Address',
@@ -23,8 +22,10 @@ module.exports = {
   },
   fn: async function (inputs, exits) {
     let mac = inputs.mac,
+      macpat = /^[0-9a-f]{1,2}([.:-])[0-9a-f]{1,2}(?:\1[0-9a-f]{1,2}){4}$/i,
       ip = inputs.ip,
       ippatt = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    if (!macpat.test(mac)) return exits.error('Invalid MAC Address format');
     if (ip === undefined ||
       !ippatt.test(ip)
     ) {

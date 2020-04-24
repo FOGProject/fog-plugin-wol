@@ -6,7 +6,7 @@ module.exports = {
       res = this.res,
       params = req.allParams(),
       id = params.id;
-    await Group.findOne({id}, async (err, group) => {
+    await Group.findOne({id}).populate('hosts').exec(async (err, group) => {
       if (err) return exits.error(err);
       await sails.helpers.wol.wakeGroup(group).switch({
         error: (err) => {
