@@ -3,7 +3,7 @@ module.exports = function(sails) {
   // Load policies under ./api/policies and config under ./config
   loader.configure({
     //hooks: __dirname + '/api/hooks',
-    policies: __dirname + '/api/policies',
+    //policies: __dirname + '/api/policies',
     config: __dirname + '/config'
   });
 
