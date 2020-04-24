@@ -6,8 +6,8 @@ module.exports = {
       res = this.res,
       params = req.allParams(),
       mac = params.mac,
-      ip = params.ip;
-    await sails.helpers.wol.emit(mac, (err, info) => {
+      ip = params.ip || undefined;
+    await sails.helpers.wol.emit(mac, ip, (err, info) => {
       if (err) throw {error: err};
       return info;
     });

@@ -4,7 +4,7 @@ const sails = require('sails'),
 before(function(done) {
   this.timeout(11000);
   sails.lift({
-    appPath: __dirname + '/../../',
+    appPath: '../..',
     hooks: {
       'fog-plugin-wol': require('../'),
       grunt: false
