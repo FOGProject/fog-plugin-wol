@@ -23,7 +23,7 @@
   "bundleDependencies": false,
   "dependencies": {
     "node-wol": "^0.1.1",
-    "sails-util-mvcsloader": "^0.4.0"
+    "sails-util-micro-apps": "^1.1.1"
   },
   "deprecated": false,
   "description": "A wake-on-lan plugin for fog 2.0",
