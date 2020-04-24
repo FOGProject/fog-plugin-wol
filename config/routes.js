@@ -1,22 +1,22 @@
 module.exports.routes = {
-  '/wol': async (req, res, next) => {
-    res.json('FOG WOL Plugin')
-  },
+  '/wol':                              {action: 'wol'},
   '/wol/send/:mac/:ip?': async (req, res, next) => {
     let params = req.allParams(),
-      mac = params.mac;
-    await sails.helpers.wol.emit(mac);
+      mac = params.mac,
+      ip = params.ip;
+    sails.log.error(sails);
+    return res.json(await sails.helpers.wol.emit(mac, ip));
   },
   '/wol/host/:id': async (req, res, next) => {
     let params = req.allParams(),
       id = params.id,
       host = await Host.findOne({id}).populateAll();
-    await sails.helpers.wol.wakeHost(host);
+    await sails.helpers.wakeHost(host);
   },
   '/wol/group/:id': async (req, res, next) => {
     let params = req.allParams(),
       id = params.id,
       group = await Host.findOne({id}).populateAll();
-    await sails.helpers.wol.wakeGroup(group);
+    await sails.helpers.wakeGroup(group);
   }
 };

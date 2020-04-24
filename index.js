@@ -1,7 +1,9 @@
 module.exports = function(sails) {
-  var loader = require('sails-util-mvcsloader')(sails);
+  var loader = require('sails-util-micro-apps')(sails);
   // Load policies under ./api/policies and config under ./config
   loader.configure({
+    //hooks: __dirname + '/api/hooks',
+    policies: __dirname + '/api/policies',
     config: __dirname + '/config'
   });
 
@@ -9,10 +11,14 @@ module.exports = function(sails) {
     initialize: function (next) {
       /**
        * Load helpers under ./api/helpers
+       * Load controllers under ./api/controllers
        */
       loader.inject(
         {
-          helpers: __dirname + '/api/helpers'
+          controllers: __dirname + '/api/controllers',
+          //models: __dirname + '/api/models',
+          helpers: __dirname + '/api/helpers',
+          //services: __dirname + '/api/services'
         },
         (err) => {
           return next(err);
