@@ -17,7 +17,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "github:fogproject/fog-plugin-wol#fd5282d1c284eb6826ab7908df270643dc3a7d16",
+  "_resolved": "github:fogproject/fog-plugin-wol#609abc301e6e1c3410b767586e78e7daebb955ae",
   "_spec": "github:fogproject/fog-plugin-wol",
   "_where": "/root/fog-node",
   "bundleDependencies": false,

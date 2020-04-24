@@ -19,16 +19,14 @@ module.exports = {
       hosts = group.hosts,
       messages = [];
     if (hosts === undefined || hosts.length < 1) return exits.success('Group has no hosts associated');
-    hosts.forEach((host) => {
-      sails.helpers.wol.wakeHost(host).switch({
-        error: (err) => {
-          return exits.error(err);
-        },
-        success: (info) => {
-          messages.push(info);
-        }
+    for (var i = 0; i < hosts.length; i++) {
+      let host = hosts[i];
+      await sails.helpers.wol.wakeHost(host).intercept('error', (err) => {
+        return exits.error(err);
+      }).then((info) => {
+        messages.push(info);
       });
-    });
+    }
     messages.push({message: `WOL Packets sent to group: ${group.name}`});
     return exits.success({messages});
   }

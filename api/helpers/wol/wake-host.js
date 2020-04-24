@@ -20,16 +20,14 @@ module.exports = {
       ip = host.ip || false,
       messages = [];
     if (macs === undefined || macs.length < 1) return exits.success('Host has no macs associated');
-    macs.forEach((mac) => {
-      sails.helpers.wol.emit(mac, ip).switch({
-        error: (err) => {
-          return exits.error(err);
-        },
-        success: (info) => {
-          messages.push(info);
-        }
+    for (var i = 0; i < macs.length; i++) {
+      let mac = macs[i];
+      await sails.helpers.wol.emit(mac, ip).intercept('error', (err) => {
+        return exits.error(err);
+      }).then((info) => {
+        messages.push(info);
       });
-    });
+    }
     messages.push({message: `WOL Packet sent to host: ${host.name}`});
     return exits.success({messages});
   }
