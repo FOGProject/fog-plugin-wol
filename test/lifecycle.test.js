@@ -22,7 +22,7 @@ describe('Route /wol test::', function() {
     supertest(sails.hooks.http.app)
     .get('/wol')
     .expect(200)
-    .expect('"FOG WOL Plugin"', done);
+    .expect('{\n  "message": "FOG WOL Plugin"\n}', done);
   });
 });
 describe('Route /wol/send/:mac test::', function() {
