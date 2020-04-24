@@ -30,12 +30,12 @@ module.exports = {
     ) {
       await wol.wake(mac, (err) => {
         if (err) return exits.error(err);
-        return exits.success({message: `WOL request sent to MAC: ${mac}`})
+        return exits.success(false, {message: `WOL request sent to MAC: ${mac}`})
       });
     }
     await wol.wake(mac, {address: ip}, (err) => {
       if (err) return exits.error(err);
-      return exits.success({message: `WOL request sent to MAC: ${mac} with IP: ${ip}`})
+      return exits.success(false, {message: `WOL request sent to MAC: ${mac} with IP: ${ip}`})
     });
   }
 };

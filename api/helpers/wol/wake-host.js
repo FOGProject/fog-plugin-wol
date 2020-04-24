@@ -1,6 +1,6 @@
 module.exports = {
   friendlyName: 'Wake host',
-  description: '',
+  description: 'Perform wake host',
   inputs: {
     host: {
       friendlyName: 'Host',
@@ -15,10 +15,13 @@ module.exports = {
     }
   },
   fn:  async function (inputs, exits) {
-    let host = inputs.host;
-    for (var i = 0; i < host.macs.length; i++) {
-      await sails.helpers.wol.emit(host.macs[i]);
-    }
-    return exits.success();
+    let host = inputs.host,
+      macs = host.macs;
+    await macs.forEach(async (mac) => {
+      await sails.helpers.wol.emit(mac, (err, info) => {
+        if (err) throw {error: err};
+      });
+    });
+    return exits.success(null, {message: `WOL Packet sent to host: ${host.name}`});
   }
 };
