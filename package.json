@@ -1,38 +1,13 @@
 {
-  "_from": "github:fogproject/fog-plugin-wol",
-  "_id": "fog-plugin-wol@0.0.1",
-  "_inBundle": false,
-  "_integrity": "",
-  "_location": "/fog-plugin-wol",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "git",
-    "raw": "github:fogproject/fog-plugin-wol",
-    "rawSpec": "github:fogproject/fog-plugin-wol",
-    "saveSpec": "github:fogproject/fog-plugin-wol",
-    "fetchSpec": null,
-    "gitCommittish": null
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "github:fogproject/fog-plugin-wol#609abc301e6e1c3410b767586e78e7daebb955ae",
-  "_spec": "github:fogproject/fog-plugin-wol",
-  "_where": "/root/fog-node",
   "bundleDependencies": false,
   "dependencies": {
     "node-wol": "^0.1.1",
-    "sails-util-micro-apps": "^1.1.1"
+    "sails-util-micro-apps": "github:fogproject/sails-util-micro-apps"
   },
   "deprecated": false,
   "description": "A wake-on-lan plugin for fog 2.0",
   "fog": {
-    "isPlugin": true,
-    "hooks": {
-      "host.deploy": "sails.helpers.wol.wakeHost",
-      "host.capture": "sails.helpers.wol.wakeHost"
-    }
+    "isPlugin": true
   },
   "main": "index.js",
   "name": "fog-plugin-wol",
@@ -41,7 +16,7 @@
     "isHook": true
   },
   "scripts": {
-    "test": "node ../node_modules/mocha/bin/mocha test/route/**/*.test.js"
+    "test": "node ../node_modules/mocha/bin/mocha test/**/*.test.js"
   },
   "version": "0.0.1"
 }
